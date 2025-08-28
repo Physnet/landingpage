@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PhysNet — Landing</title>
+    <meta name="description" content="PhysNet — simple landing page for testing and basic info." />
+    <meta name="color-scheme" content="light dark" />
+    <style>
+        :root { --max: 920px; --pad: clamp(16px, 3vw, 28px); --brand-1: #0ea5e9; --brand-2: #2563eb; --hero-w: 200px; }
+        html,body { height: 100%; margin: 0; }
+        body {
+          font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+          color: canvastext; background: canvas;
+          display: grid; min-height: 100dvh; grid-template-rows: auto 1fr auto;
+        }
+        .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+        header { border-bottom: 1px solid color-mix(in oklab, canvastext 15%, canvas); }
+        header .wrap { display: flex; align-items: center; gap: 16px; padding: 18px var(--pad); }
+        .logo {
+          width: 40px; height: 40px; border-radius: 8px;
+          background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+          color: white;
+          display: grid; place-items: center; font-weight: 800;
+          letter-spacing: .5px;
+          box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 6px 18px rgba(37,99,235,.25);
+        }
+        .brand { font-weight: 700; color: var(--brand-2); }
+        main .wrap { display: grid; gap: 28px; padding: 42px var(--pad) 56px; }
+        h1 { margin: 0; font-size: clamp(28px, 4.5vw, 42px); line-height: 1.15; }
+        p.lead { font-size: clamp(16px, 2.3vw, 20px); margin: 8px 0 0; color: color-mix(in oklab, canvastext 72%, canvas); }
+        .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+        .btn {
+          appearance: none; border: 1px solid color-mix(in oklab, canvastext 25%, canvas);
+          background: color-mix(in oklab, canvastext 6%, canvas);
+          color: inherit; padding: 10px 14px; border-radius: 10px; text-decoration: none; font-weight: 600;
+        }
+        .btn:hover { border-color: color-mix(in oklab, canvastext 40%, canvas); }
+        .btn { background: color-mix(in oklab, var(--brand-1) 6%, canvas); }
+        .btn:hover { border-color: color-mix(in oklab, var(--brand-2) 40%, canvas); }
+        .hero { margin-top: 16px; max-width: var(--hero-w); margin-left: auto; margin-right: auto; }
+        .hero img { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid color-mix(in oklab, canvastext 12%, canvas); }
+        .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 1px, 1px); white-space: nowrap; border: 0; }
+        section { border: 1px solid color-mix(in oklab, canvastext 12%, canvas); border-radius: 14px; padding: 18px; }
+        section h2 { margin: 0 0 6px; font-size: 18px; }
+        ul { margin: 8px 0 0 18px; }
+        footer { border-top: 1px solid color-mix(in oklab, canvastext 15%, canvas); }
+        footer .wrap { padding: 16px var(--pad); font-size: 14px; color: color-mix(in oklab, canvastext 65%, canvas); }
+        .note { margin-top: 8px; font-size: 14px; color: color-mix(in oklab, canvastext 60%, canvas); }
+    </style>
+</head>
+<body>
+<header>
+    <div class="wrap">
+        <div class="logo" aria-label="PhysNet">PN</div>
+        <div class="brand">PhysNet</div>
+    </div>
+</header>
+
+<main>
+    <div class="wrap">
+        <div>
+            <h1>Hello, this is a tiny landing page.</h1>
+            <p class="lead">Used to test DNS, hosting setup, and basic branding. Content will be expanded later.</p>
+            <div class="cta">
+  <a id="contact-btn" class="btn" rel="nofollow noreferrer noopener" aria-label="Contact via email">Contact</a>
+</div>
+<noscript><p class="note">Email hidden. Enable JavaScript to view contact information.</p></noscript>
+        </div>
+
+        <figure class="hero">
+          <img src="assets/science.jpeg" alt="PhysNet science image" loading="lazy" decoding="async" fetchpriority="low" width="400" height="225" />
+          <figcaption class="visually-hidden">PhysNet Science image</figcaption>
+        </figure>
+
+        <section>
+            <h2>Status</h2>
+            <ul>
+                <li>Page active: this domain resolves correctly.</li>
+                <li>Layout: minimal HTML & CSS only.</li>
+                <li>Purpose: placeholder for future updates.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Notes</h2>
+            <ul>
+                <li>This site is under development.</li>
+                <li>Design and content may change anytime.</li>
+                <li>More information will be published here.</li>
+            </ul>
+        </section>
+    </div>
+</main>
+
+<footer>
+    <div class="wrap">© <span id="y"></span> PhysNet • All rights reserved.</div>
+</footer>
+
+<script>
+  (function(){
+    // Max-obfuscation: no plain address in source; build only on user action
+    var k = 7; // XOR key
+    var bytes = [107,102,105,99,110,105,96,71,119,111,126,116,105,98,115,41,98,114];
+    function decode(arr){ return String.fromCharCode.apply(null, arr.map(function(n){return n ^ k;})); }
+    var link = document.getElementById('contact-btn');
+    function activate(evt){
+      var addr = decode(bytes); // "landing@physnet.eu"
+      // Replace click target with a real mailto only at interaction time
+      link.setAttribute('href', 'mailto:' + addr);
+      // Optionally set link text once to avoid exposing address anywhere else
+      if (!link.dataset.ready){ link.dataset.ready = '1'; }
+      // Navigate immediately on first interaction
+      if (evt && evt.type !== 'keydown'){ location.href = link.href; }
+    }
+    link.addEventListener('pointerdown', activate, { once: true });
+    link.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ activate(e); } }, { once: true });
+  })();
+</script>
+<script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
